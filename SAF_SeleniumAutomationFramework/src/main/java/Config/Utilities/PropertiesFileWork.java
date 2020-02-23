@@ -92,6 +92,7 @@ public class PropertiesFileWork {
             ex.printStackTrace();
         }
 
+        //Data loaded to LHM
         loadPropertiesFileData(filePath);
     }
     public static void removeDataInPropertiesFile(String filePath, String key, String value) {
@@ -109,7 +110,7 @@ public class PropertiesFileWork {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
+        //Data loaded to LHM
         loadPropertiesFileData(filePath);
     }
 
