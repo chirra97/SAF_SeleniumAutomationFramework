@@ -1,0 +1,24 @@
+TestData0 :
+   Userid: csr
+   Pwd : chirra
+   
+TestData1 : 
+   Email : csr@gmail.com
+   pwd : csr
+   
+TestData2 : 
+   -csr
+   -reddy
+   #comment
+   
+menu:
+  font:
+    family: Arial
+    color: blue
+    size: 14pt
+
+  # Font and BackgroundImage need to be indented the same amount.
+  backgroundImage:
+    image: menu.png
+    tile:  true
+   

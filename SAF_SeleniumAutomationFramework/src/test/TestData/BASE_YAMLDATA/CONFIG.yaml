@@ -1,0 +1,16 @@
+RunConfig:
+  Chrome: Yes
+  Firefox: No
+  IE: No
+  Isparallel: Yes
+  ThreadCount: 2
+  WaitTime_Seconds : 60
+
+
+ExecuteTestCaseNumAndClassNameMapping:
+  TC001: FirstTest
+  TC002: XYZ345
+
+ExecuteTestCaseNumAndStatusMapping:
+  TC001: Yes
+  TC002: No

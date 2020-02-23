@@ -1,0 +1,9 @@
+TC001:
+  Url: http://www.google.com
+  UserId: csr
+  Password: amma
+
+TC002:
+  Url1: http://www.google.com
+  UserId1: csr
+  Password1: amma
