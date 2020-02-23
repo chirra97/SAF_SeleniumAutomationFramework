@@ -75,4 +75,42 @@ public class PropertiesFileWork {
         loadPropertiesFileData(filePath);
     }
 
+    public static void updateDataInPropertiesFile(String filePath, String key, String value) {
+        propertiesFileDataLHM = new LinkedHashMap<String, String>();
+        FileOutputStream fileOut = null;
+        FileInputStream fileIn = null;
+        try {
+            Properties prop = new Properties();
+            File file = new File(filePath);
+            fileIn = new FileInputStream(file);
+            prop.load(fileIn);
+            prop.remove(key);
+            prop.setProperty(key, value);
+            fileOut = new FileOutputStream(file);
+            prop.store(fileOut, "CSR properties");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        loadPropertiesFileData(filePath);
+    }
+    public static void removeDataInPropertiesFile(String filePath, String key, String value) {
+        propertiesFileDataLHM = new LinkedHashMap<String, String>();
+        FileOutputStream fileOut = null;
+        FileInputStream fileIn = null;
+        try {
+            Properties prop = new Properties();
+            File file = new File(filePath);
+            fileIn = new FileInputStream(file);
+            prop.load(fileIn);
+            prop.remove(key);
+            fileOut = new FileOutputStream(file);
+            prop.store(fileOut, "CSR properties");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        loadPropertiesFileData(filePath);
+    }
+
 }
