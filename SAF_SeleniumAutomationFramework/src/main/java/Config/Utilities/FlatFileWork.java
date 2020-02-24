@@ -4,8 +4,8 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class FlatFileWork {
-    public boolean createFile(String path) {
-        File fileObj = new File(path);
+    public boolean createFile(String filePath) {
+        File fileObj = new File(filePath);
         if (!fileObj.exists()) {
             try {
                 fileObj.createNewFile();
@@ -22,7 +22,7 @@ public class FlatFileWork {
             File file = new File(filePath);
             FileWriter fr = new FileWriter(file, true);
             BufferedWriter br = new BufferedWriter(fr);
-            br.write("\n" + appendText);
+            br.write(appendText + "\n" );
             br.close();
             fr.close();
         } catch (IOException e) {
@@ -36,7 +36,7 @@ public class FlatFileWork {
             FileWriter fr = new FileWriter(file, true);
             BufferedWriter br = new BufferedWriter(fr);
             for (String line : appendText)
-                br.write("\n" + line);
+                br.write(line + "\n");
             br.close();
             fr.close();
         } catch (IOException e) {
