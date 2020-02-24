@@ -1,22 +1,22 @@
 package Config.Utilities;
 
 import Config.DriverSetup.DriverSetup;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Random;
+import java.io.File;
+import java.io.IOException;
 
 public class ElementsCustomCode {
+    public static void main(String[] args) {
+
+
+    }
+
     private boolean highlightElement(WebElement element) {
-        if(element == null) {
+        if (element == null) {
             System.out.println("Element is NULL");
             return false;
         }
@@ -26,43 +26,49 @@ public class ElementsCustomCode {
         }
         return true;
     }
-    public boolean waitForElementVisible(By webElementBy, boolean maxWaitForElementStatus){
-        try{
+
+    public boolean waitForElementVisible(By webElementBy, boolean maxWaitForElementStatus) {
+        try {
             WebDriverWait waitObj;
-            if(maxWaitForElementStatus)
+            if (maxWaitForElementStatus)
                 waitObj = new WebDriverWait(new DriverSetup().driver, new DriverSetup().maxWaitTimeForElement);
             else
                 waitObj = new WebDriverWait(new DriverSetup().driver, 5);
             waitObj.until(ExpectedConditions.visibilityOf(new DriverSetup().driver.findElement(webElementBy)));
             highlightElement(new DriverSetup().driver.findElement(webElementBy));
             return true;
-        }catch (Exception error){
+        } catch (Exception error) {
             error.printStackTrace();
             return false;
         }
     }
-    public boolean waitForElementClickable(By webElementBy, boolean maxWaitForElementStatus){
-        try{
+
+    public boolean waitForElementClickable(By webElementBy, boolean maxWaitForElementStatus) {
+        try {
             WebDriverWait waitObj;
-            if(maxWaitForElementStatus)
+            if (maxWaitForElementStatus)
                 waitObj = new WebDriverWait(new DriverSetup().driver, new DriverSetup().maxWaitTimeForElement);
             else
                 waitObj = new WebDriverWait(new DriverSetup().driver, 5);
             waitObj.until(ExpectedConditions.elementToBeClickable(new DriverSetup().driver.findElement(webElementBy)));
             highlightElement(new DriverSetup().driver.findElement(webElementBy));
             return true;
-        }catch (Exception error){
+        } catch (Exception error) {
             return false;
         }
     }
 
-
-
-
-
-    public static void main(String[] args) {
-
-
+    public String captureApplicationScreenShot(String folderPath, String fileName) {
+        TakesScreenshot scrShot = ((TakesScreenshot) new DriverSetup().driver);
+        File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
+        String imagePath = folderPath + "\\" + fileName;
+        File DestFile = new File(imagePath);
+        try {
+            FileUtils.copyFile(SrcFile, DestFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return imagePath;
     }
 
 }
