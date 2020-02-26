@@ -38,7 +38,8 @@ public class HTMLReport {
     }
     public static void addTestCaseToReport(String testCaseName, String testCaseDescription) {
         if (extent == null) {
-            if(new FileDirectoryWork().isFileOrDirectoryExists(projectFolderPath+"/"+htmlReport_screenshotFolderPath));
+            if(!new FileDirectoryWork().isFileOrDirectoryExists(projectFolderPath+"/"+htmlReport_screenshotFolderPath))
+                new FileDirectoryWork().createDirectory(projectFolderPath+"/"+htmlReport_screenshotFolderPath);
             String timeStamp = new DateTimeWork().getCurrentDateTime(new DateTimeWork().dateTimeFormat_4);
             htmlReport_htmlResultFilePath = htmlReport_htmlResultFilePath.replace(".html", timeStamp+".html");
             extent = new ExtentReports(htmlReport_htmlResultFilePath, true);

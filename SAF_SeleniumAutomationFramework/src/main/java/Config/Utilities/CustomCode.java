@@ -23,6 +23,11 @@ public class CustomCode {
         return path;
     }
 
+    public static String getUserName() {
+        String path = System.getProperty("user.name");
+        return path;
+    }
+
     public static String getTempFolderPath() {
         String path = System.getProperty("java.io.tmpdir");
         return path;
@@ -64,5 +69,6 @@ public class CustomCode {
         System.out.println("Encrypted String - " + encryptedString);
         String decryptedString = decryptText(encryptedString);
         System.out.println("After decryption - " + decryptedString);
+        System.out.println("User name - " +getUserName());
     }
 }
