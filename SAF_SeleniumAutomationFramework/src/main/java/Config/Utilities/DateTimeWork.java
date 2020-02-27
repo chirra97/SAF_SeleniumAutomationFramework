@@ -32,6 +32,10 @@ public class DateTimeWork {
         return "" + formatter.format(date);
     }
 
+    public static String getCurrentDateTimeInMillis() {
+        return ""+System.currentTimeMillis();
+    }
+
     public String getCurrentDateTime() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
         Date date = new Date();
@@ -42,6 +46,28 @@ public class DateTimeWork {
 
     public String getDateTimeDifferance(String startDateTime, String enddateTime) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+        Date d1 = null;
+        Date d2 = null;
+        try {
+            d1 = formatter.parse(startDateTime);
+            d2 = formatter.parse(enddateTime);
+        } catch (ParseException e) {
+        }
+
+        //in milliseconds
+        long diff = d2.getTime() - d1.getTime();
+
+        long diffSeconds = diff / 1000 % 60;
+        long diffMinutes = diff / (60 * 1000) % 60;
+        long diffHours = diff / (60 * 60 * 1000) % 24;
+        long diffDays = diff / (24 * 60 * 60 * 1000);
+
+        String dateTimeDifferance = "" + diffDays + " days, " + diffHours + " hours, " + diffMinutes + " minutes, " + diffSeconds + " seconds.";
+        return dateTimeDifferance;
+    }
+
+    public static String getDateTimeDifferance(String format, String startDateTime, String enddateTime) {
+        SimpleDateFormat formatter = new SimpleDateFormat(format);
         Date d1 = null;
         Date d2 = null;
         try {

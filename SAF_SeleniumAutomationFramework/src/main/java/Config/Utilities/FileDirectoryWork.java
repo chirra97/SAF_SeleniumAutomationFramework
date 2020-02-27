@@ -7,25 +7,25 @@ import java.util.ArrayList;
 public class FileDirectoryWork {
 
 
-    public boolean isFileOrDirectoryExists(String path) {
+    public static boolean isFileOrDirectoryExists(String path) {
         File fileObj = new File(path);
         return fileObj.exists();
     }
 
-    public boolean createDirectory(String path) {
+    public static String  createDirectory(String path) {
         File fileObj = new File(path);
         if (!fileObj.exists()) {
             try {
                 fileObj.mkdir();
-                return true;
+                return null;
             } catch (Exception e) {
-                return false;
+                return null;
             }
         }
-        return false;
+        return path;
     }
 
-    public boolean createFile(String path) {
+    public static boolean createFile(String path) {
         File fileObj = new File(path);
         if (!fileObj.exists()) {
             try {
@@ -38,7 +38,7 @@ public class FileDirectoryWork {
         return false;
     }
 
-    public ArrayList<String> getAllFileNamesFromFolder(String path) {
+    public static ArrayList<String> getAllFileNamesFromFolder(String path) {
         ArrayList<String> fileNamesAL = new ArrayList<String>();
         File folder = new File(path);
         File[] files = folder.listFiles();
