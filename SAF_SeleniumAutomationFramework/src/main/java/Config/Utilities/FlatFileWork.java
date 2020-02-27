@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class FlatFileWork {
-    public boolean createFile(String filePath) {
+    public static boolean createFile(String filePath) {
         File fileObj = new File(filePath);
         if (!fileObj.exists()) {
             try {
@@ -17,7 +17,7 @@ public class FlatFileWork {
         return false;
     }
 
-    public void appendTextToFile(String filePath, String appendText) {
+    public static void appendTextToFile(String filePath, String appendText) {
         try {
             File file = new File(filePath);
             FileWriter fr = new FileWriter(file, true);
@@ -30,7 +30,7 @@ public class FlatFileWork {
         }
     }
 
-    public void appendTextToFile(String filePath, ArrayList<String> appendText) {
+    public static void appendTextToFile(String filePath, ArrayList<String> appendText) {
         try {
             File file = new File(filePath);
             FileWriter fr = new FileWriter(file, true);
@@ -44,7 +44,7 @@ public class FlatFileWork {
         }
     }
 
-    public ArrayList<String> getFileData(String filePath) {
+    public static ArrayList<String> getFileData(String filePath) {
         ArrayList<String> fileData_AL = new ArrayList<String>();
         File file = new File(filePath);
         BufferedReader br = null;
@@ -59,13 +59,27 @@ public class FlatFileWork {
         return fileData_AL;
     }
 
-    public void createAndDataWriteIntoFile(String filePath, ArrayList<String> writeData) {
+    public static void createAndDataWriteIntoFile(String filePath, ArrayList<String> writeData) {
         try {
             File file = new File(filePath);
             FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
             BufferedWriter bw = new BufferedWriter(fw);
             for (String outputLine : writeData)
                 bw.write(outputLine + "\n");
+            if (bw != null)
+                bw.close();
+            if (fw != null)
+                fw.close();
+        } catch (IOException e) {
+        }
+    }
+
+    public static void createAndDataWriteIntoFile(String filePath, String writeData) {
+        try {
+            File file = new File(filePath);
+            FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(writeData + "\n");
             if (bw != null)
                 bw.close();
             if (fw != null)

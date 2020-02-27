@@ -1,10 +1,13 @@
 package Config.DataBase;
 
+import Config.Utilities.CustomCode;
 import Config.Utilities.DateTimeWork;
 import Config.Utilities.FileDirectoryWork;
+import Config.Utilities.FlatFileWork;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 
 public class MDB_TestResults {
@@ -23,8 +26,8 @@ public class MDB_TestResults {
 
     }
 
-    static LinkedHashMap<String, LinkedHashMap<String, String>> testCaseesReportLogDetails_LHM = new LinkedHashMap<String, LinkedHashMap<String, String>>();
-    public static void setTestCaseesReportLogDetails(String testCaseName, LinkedHashMap<String, LinkedHashMap<String, String>> testCaseData_LHM){
+    static LinkedHashMap<String, LinkedHashMap<String, String>> testCaseesSummaryReportData_LHM = new LinkedHashMap<String, LinkedHashMap<String, String>>();
+    public static LinkedHashMap<String, LinkedHashMap<String, String>> setTestCasesSummaryReportData(String testCaseName, LinkedHashMap<String, LinkedHashMap<String, String>> testCaseData_LHM){
         LinkedHashMap<String, String> testCaseReportDetils_LHS = new LinkedHashMap<String, String>();
         String status = "PASS";
         int totalStepsCount = testCaseData_LHM.size();
@@ -58,26 +61,135 @@ public class MDB_TestResults {
         String testCaseExecutionDuration = DateTimeWork.getDateTimeDifferance("yyyy-MM-dd HH:mm:ss", testCaseStartTime, testCaseEndtTime);
         testCaseReportDetils_LHS.put("testCaseExecutionDuration", testCaseExecutionDuration);
 
-        testCaseesReportLogDetails_LHM.put(testCaseName, testCaseReportDetils_LHS);
+        testCaseesSummaryReportData_LHM.put(testCaseName, testCaseReportDetils_LHS);
+        return testCaseesSummaryReportData_LHM;
     }
 
 
+    public static String createTestSummaryReport(LinkedHashMap<String, LinkedHashMap<String, String>> testCasesReportLogDetails_LHM){
+        LinkedHashMap<String, Integer> tcSummaryReportData_LHM = new LinkedHashMap<String, Integer>();
+        System.out.println("testCasesReportLogDetails_LHM : "+testCasesReportLogDetails_LHM);
+        String tr = "";
+        String td = "";
+        for(String outerKey : testCasesReportLogDetails_LHM.keySet()){
+            LinkedHashMap<String, String> tcData_LHM = new LinkedHashMap<String, String>();
+            String tcReportName = outerKey.replaceAll(" ", "_")+".html";
+            tcData_LHM = testCasesReportLogDetails_LHM.get(outerKey);
+            String tdValue = "";
+            String tdSet = "";
+            for(String innerKey : tcData_LHM.keySet()){
+                tdValue = tcData_LHM.get(innerKey);
+                tdSet = tdSet + td + TestResultsConstants.summaryReportTestCaseTDStart + tdValue + TestResultsConstants.summaryReportTestCaseTDEnd;
 
+                if(innerKey.equalsIgnoreCase("testCaseStatus")){
+                    if(tcSummaryReportData_LHM.containsKey(innerKey+tdValue)){
+                        int count = tcSummaryReportData_LHM.get(innerKey+tdValue) + 1;
+                        tcSummaryReportData_LHM.put(innerKey+tdValue, count);
+                    }else{
+                        tcSummaryReportData_LHM.put(innerKey+tdValue, 1);
+                    }
+                }
+                else if(innerKey.equalsIgnoreCase("passStepsCount")){
+                    if(tcSummaryReportData_LHM.containsKey(innerKey)){
+                        int count = tcSummaryReportData_LHM.get(innerKey) + Integer.parseInt(tdValue);
+                        tcSummaryReportData_LHM.put(innerKey, count);
+                    }else{
+                        tcSummaryReportData_LHM.put(innerKey, Integer.parseInt(tdValue));
+                    }
+                }
+                else if(innerKey.equalsIgnoreCase("failStepsCount")){
+                    if(tcSummaryReportData_LHM.containsKey(innerKey)){
+                        int count = tcSummaryReportData_LHM.get(innerKey) + Integer.parseInt(tdValue);
+                        tcSummaryReportData_LHM.put(innerKey, count);
+                    }else{
+                        tcSummaryReportData_LHM.put(innerKey, Integer.parseInt(tdValue));
+                    }
+                }
+            }
+            //Adding link
+            tdSet = tdSet +TestResultsConstants.summaryReportTestCaseTDLinkStart.replaceAll("###HREF_LINK###", tcReportName)+
+                    TestResultsConstants.summaryReportTestCaseTDLinkEnd;
+
+            tr = tr + TestResultsConstants.summaryReportTestCaseTRStart + tdSet + TestResultsConstants.summaryReportTestCaseTREnd;
+        }
+        System.out.println("tr : "+tr);
+        System.out.println("tcSummaryReportData_LHM : "+tcSummaryReportData_LHM);
+
+        String testSummaryReportString = TestResultsHTMLCode.summaryHTMLCode;
+        testSummaryReportString = testSummaryReportString.replaceAll("###TCDATA###", tr);
+
+        //System details update
+        testSummaryReportString = testSummaryReportString.replaceAll("###OSNAME###", CustomCode.getSystemOSName());
+        testSummaryReportString = testSummaryReportString.replaceAll("###UID###", CustomCode.getUserName());
+        testSummaryReportString = testSummaryReportString.replaceAll("###EXETIME###", executionStartedAt);
+
+        //Graphs Data update
+        testSummaryReportString = testSummaryReportString.replaceAll("###TCPASSCOUNT###", ""+tcSummaryReportData_LHM.get("testCaseStatusPASS"));
+        testSummaryReportString = testSummaryReportString.replaceAll("###TCFAILCOUNT###", ""+tcSummaryReportData_LHM.get("testCaseStatusFAIL"));
+
+        testSummaryReportString = testSummaryReportString.replaceAll("###STEPPASSCOUNT###", ""+tcSummaryReportData_LHM.get("passStepsCount"));
+        testSummaryReportString = testSummaryReportString.replaceAll("###STEPFAILCOUNT###", ""+tcSummaryReportData_LHM.get("failStepsCount"));
+
+        FlatFileWork.appendTextToFile(MSACCESS_DataBaseConstants.MSACCESS_RESULTS_PATH+ "/CSR_SAF_SummaryReport.html", testSummaryReportString);
+
+        return ""+true;
+    }
+
+
+    public static void createTestCaseReport(String testCaseName, LinkedHashMap<String, LinkedHashMap<String, String>> testCasesData_LHM){
+        String tr = "";
+        String td = "";
+        String tcReportName = testCaseName.replaceAll(" ", "_") + ".html";
+        for(String outerKey : testCasesData_LHM.keySet()) {
+            LinkedHashMap<String, String> tcData_LHM = new LinkedHashMap<String, String>();
+            tcData_LHM = testCasesData_LHM.get(outerKey);
+            String tdValue = "";
+            String tdSet = "";
+            for (String innerKey : tcData_LHM.keySet()) {
+                tdValue = tcData_LHM.get(innerKey);
+                if(innerKey.equalsIgnoreCase("testCaseId")){
+                    tdValue = tcData_LHM.get("testStepSno");
+                }
+                if(innerKey.equalsIgnoreCase("testCaseName") || innerKey.equalsIgnoreCase("testStepSno")){
+                    continue;
+                }else if(innerKey.equalsIgnoreCase("testStepImagePath")){
+                    tdSet = tdSet +TestResultsConstants.tcDetailsReportTestCaseTDLinkStart.replaceAll("###HREF_LINK###", tdValue)+
+                            TestResultsConstants.tcDetailsReportTestCaseTDLinkEnd;
+                }
+                else
+                    tdSet = tdSet + td + TestResultsConstants.tcDetailsReportTestCaseTDStart + tdValue + TestResultsConstants.summaryReportTestCaseTDEnd;
+            }
+            tr = tr + TestResultsConstants.summaryReportTestCaseTRStart + tdSet + TestResultsConstants.summaryReportTestCaseTREnd;
+        }
+        System.out.println("testCaseDetailsReport : "+tr);
+
+        String tcReportString = TestResultsHTMLCode.tcHTMLCode;
+        tcReportString = tcReportString.replaceAll("###TCNAME###", testCaseName).replaceAll("###TCDETAILS###", tr);
+        FlatFileWork.createAndDataWriteIntoFile(MSACCESS_DataBaseConstants.MSACCESS_RESULTS_PATH+ "/"+tcReportName, tcReportString);
+    }
+
+    static String executionStartedAt = "";
     public static void main(String[] args) throws SQLException {
 
+        executionStartedAt = DateTimeWork.getCurrentDateTime();
         ArrayList<String> allTestCasesName_AL = new ArrayList<String>();
         allTestCasesName_AL = MDB_TestResults_DBWork.getAllTestCaseNames("src/test/Results/CSR_SAF_RESULTS_1582727021199");
         System.out.println("allTestCasesName_AL : "+allTestCasesName_AL);
         for(String testCase : allTestCasesName_AL){
-            LinkedHashMap<String, LinkedHashMap<String, String>> testCaseData_LHM = new  LinkedHashMap<String, LinkedHashMap<String, String>>();
-            testCaseData_LHM = MDB_TestResults_DBWork.getTestCaseData("src/test/Results/CSR_SAF_RESULTS_1582727021199",
+            LinkedHashMap<String, LinkedHashMap<String, String>> testCasesData_LHM = new  LinkedHashMap<String, LinkedHashMap<String, String>>();
+            testCasesData_LHM = MDB_TestResults_DBWork.getTestCaseData("src/test/Results/CSR_SAF_RESULTS_1582727021199",
                     testCase);
 
-            setTestCaseesReportLogDetails(testCase, testCaseData_LHM);
+            setTestCasesSummaryReportData(testCase, testCasesData_LHM);
+
+            createTestCaseReport(testCase, testCasesData_LHM);
         }
 
-        System.out.println("testCaseesReportLogDetails_LHM : "+testCaseesReportLogDetails_LHM);
 
+
+        System.out.println("testCaseesReportLogDetails_LHM : "+testCaseesSummaryReportData_LHM);
+
+        createTestSummaryReport(testCaseesSummaryReportData_LHM);
 
         System.exit(0);
 

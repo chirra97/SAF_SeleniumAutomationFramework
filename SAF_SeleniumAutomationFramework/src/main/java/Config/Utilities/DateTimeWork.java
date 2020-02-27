@@ -36,7 +36,7 @@ public class DateTimeWork {
         return ""+System.currentTimeMillis();
     }
 
-    public String getCurrentDateTime() {
+    public static String getCurrentDateTime() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
         Date date = new Date();
         String currentDateTime = formatter.format(date);
