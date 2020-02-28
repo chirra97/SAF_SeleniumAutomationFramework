@@ -3,14 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="65f0401b-d7aa-4d52-95b8-85796171e404" name="Default Changelist" comment="Code added to get paths info">
       <change afterPath="$PROJECT_DIR$/../.idea/SAF_SeleniumAutomationFramework_.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Config/DataBase/TestResultsConstants.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Config/DataBase/TestResultsHTMLCode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Config/DataBase/MDB_TestResults.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Config/DataBase/MDB_TestResults.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Config/Utilities/DateTimeWork.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Config/Utilities/DateTimeWork.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Config/Utilities/FlatFileWork.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Config/Utilities/FlatFileWork.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Config/Utilities/DateTimeWork.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Config/Utilities/DateTimeWork.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Config/Utilities/FlatFileWork.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Config/Utilities/FlatFileWork.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -278,7 +272,14 @@
       <option name="project" value="LOCAL" />
       <updated>1582773933519</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Project Commit">
+      <created>1582807941401</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1582807941401</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -334,10 +335,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="163" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1581510468126" />
-    <state x="204" y="4" key="CommitChangelistDialog2" timestamp="1582773931606">
+    <state x="204" y="4" key="CommitChangelistDialog2" timestamp="1582807939461">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="204" y="4" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1582773931606" />
+    <state x="204" y="4" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1582807939461" />
     <state x="553" y="132" key="DetectedRootsChooserDialog" timestamp="1580892779533">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -358,22 +359,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="577" y="312" key="Github.ShareDialog/0.0.1536.824@0.0.1536.824" timestamp="1581576507083" />
-    <state width="1493" height="166" key="GridCell.Tab.0.bottom" timestamp="1582803994184">
+    <state width="1493" height="166" key="GridCell.Tab.0.bottom" timestamp="1582820670861">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="166" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1582803994184" />
-    <state width="1493" height="166" key="GridCell.Tab.0.center" timestamp="1582803994184">
+    <state width="1493" height="166" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1582820670861" />
+    <state width="1493" height="166" key="GridCell.Tab.0.center" timestamp="1582820670861">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="166" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1582803994184" />
-    <state width="1493" height="166" key="GridCell.Tab.0.left" timestamp="1582803994184">
+    <state width="1493" height="166" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1582820670861" />
+    <state width="1493" height="166" key="GridCell.Tab.0.left" timestamp="1582820670860">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="166" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1582803994184" />
-    <state width="1493" height="166" key="GridCell.Tab.0.right" timestamp="1582803994184">
+    <state width="1493" height="166" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1582820670860" />
+    <state width="1493" height="166" key="GridCell.Tab.0.right" timestamp="1582820670861">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="166" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1582803994184" />
+    <state width="1493" height="166" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1582820670861" />
     <state x="299" y="71" key="Maven.ArtifactSearchDialog" timestamp="1582520753447">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -382,10 +383,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="279" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1582464829824" />
-    <state x="361" y="149" key="Vcs.Push.Dialog.v2" timestamp="1582773995885">
+    <state x="361" y="149" key="Vcs.Push.Dialog.v2" timestamp="1582807944103">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="149" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1582773995885" />
+    <state x="361" y="149" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1582807944103" />
     <state x="477" y="241" key="com.intellij.ide.util.TipDialog" timestamp="1581578457342">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

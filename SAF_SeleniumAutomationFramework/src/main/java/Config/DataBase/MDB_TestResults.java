@@ -171,24 +171,46 @@ public class MDB_TestResults {
     static String executionStartedAt = "";
     public static void main(String[] args) throws SQLException {
 
-        executionStartedAt = DateTimeWork.getCurrentDateTime();
-        ArrayList<String> allTestCasesName_AL = new ArrayList<String>();
-        allTestCasesName_AL = MDB_TestResults_DBWork.getAllTestCaseNames("src/test/Results/CSR_SAF_RESULTS_1582727021199");
-        System.out.println("allTestCasesName_AL : "+allTestCasesName_AL);
-        for(String testCase : allTestCasesName_AL){
-            LinkedHashMap<String, LinkedHashMap<String, String>> testCasesData_LHM = new  LinkedHashMap<String, LinkedHashMap<String, String>>();
-            testCasesData_LHM = MDB_TestResults_DBWork.getTestCaseData("src/test/Results/CSR_SAF_RESULTS_1582727021199",
-                    testCase);
+        //Create Results table structure
+        setupResultsFolderStructure();
 
-            setTestCasesSummaryReportData(testCase, testCasesData_LHM);
+        //Create Results Database
+        MDB_TestResults_DBWork.createDataBase(MSACCESS_DataBaseConstants.MSACCESS_RESULTS_PATH,
+                MSACCESS_DataBaseConstants.MSACCESS_RESULTS_DATABASE_NAME);
 
-            createTestCaseReport(testCase, testCasesData_LHM);
+        //Create Results Table
+        MDB_TestResults_DBWork.createTable(MSACCESS_DataBaseConstants.MSACCESS_RESULTS_PATH,
+                MSACCESS_DataBaseConstants.MSACCESS_RESULTS_DATABASE_NAME, MSACCESS_DataBaseConstants.MSACCESS_REPORTS_TABLE_NAME,
+                MSACCESS_DataBaseConstants.MSACCESS_REPORTS_TABLE_SCHEMA);
+
+        for (int i = 0; i < 10; i++) {
+            MDB_TestResults_DBWork.insertRecordIntoTable("Login Validation Positive", "Enter UID : "+i, "Enter PWD: "+i, "PASS", "2020-02-26 10:10:10",
+                    "c:/csr.png");
+        }
+        for (int i = 0; i < 10; i++) {
+            MDB_TestResults_DBWork.insertRecordIntoTable("Login Validation Negative", "Enter UID : "+i, "Enter PWD : "+i, "PASS", "2020-02-26 10:10:10",
+                    "c:/csr.png");
         }
 
 
 
-        System.out.println("testCaseesReportLogDetails_LHM : "+testCaseesSummaryReportData_LHM);
+        executionStartedAt = DateTimeWork.getCurrentDateTime();
+        ArrayList<String> allTestCasesName_AL = new ArrayList<String>();
+        allTestCasesName_AL = MDB_TestResults_DBWork.getAllTestCaseNames(MSACCESS_DataBaseConstants.MSACCESS_RESULTS_PATH);
+        System.out.println("allTestCasesName_AL : "+allTestCasesName_AL);
+        for(String testCase : allTestCasesName_AL){
+            LinkedHashMap<String, LinkedHashMap<String, String>> testCasesData_LHM = new  LinkedHashMap<String, LinkedHashMap<String, String>>();
+            testCasesData_LHM = MDB_TestResults_DBWork.getTestCaseData(MSACCESS_DataBaseConstants.MSACCESS_RESULTS_PATH,
+                    testCase);
 
+            //Format the Database Data
+            setTestCasesSummaryReportData(testCase, testCasesData_LHM);
+
+            //Create Test wise detailed results
+            createTestCaseReport(testCase, testCasesData_LHM);
+        }
+
+        //Create Summary results
         createTestSummaryReport(testCaseesSummaryReportData_LHM);
 
         System.exit(0);
@@ -196,24 +218,8 @@ public class MDB_TestResults {
 
 
 
-        setupResultsFolderStructure();
 
-        MDB_TestResults_DBWork.createDataBase(MSACCESS_DataBaseConstants.MSACCESS_RESULTS_PATH,
-                MSACCESS_DataBaseConstants.MSACCESS_RESULTS_DATABASE_NAME);
 
-        MDB_TestResults_DBWork.createTable(MSACCESS_DataBaseConstants.MSACCESS_RESULTS_PATH,
-                MSACCESS_DataBaseConstants.MSACCESS_RESULTS_DATABASE_NAME, MSACCESS_DataBaseConstants.MSACCESS_REPORTS_TABLE_NAME,
-                MSACCESS_DataBaseConstants.MSACCESS_REPORTS_TABLE_SCHEMA);
-
-        for (int i = 0; i < 10; i++) {
-              MDB_TestResults_DBWork.insertRecordIntoTable("Login Validation Positive", "Enter UID", "Enter PWD", "PASS", "2020-02-26 10:10:10",
-                    "c:/csr.png");
-        }
-
-        for (int i = 0; i < 10; i++) {
-            MDB_TestResults_DBWork.insertRecordIntoTable("Login Validation Negative", "Enter UID", "Enter PWD", "PASS", "2020-02-26 10:10:10",
-                    "c:/csr.png");
-        }
 
 
 
