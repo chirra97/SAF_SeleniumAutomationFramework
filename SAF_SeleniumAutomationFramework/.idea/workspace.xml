@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="65f0401b-d7aa-4d52-95b8-85796171e404" name="Default Changelist" comment="Code added to get paths info">
       <change afterPath="$PROJECT_DIR$/../.idea/SAF_SeleniumAutomationFramework_.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Config/Utilities/FTPWork.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Config/DataBase/MDB_TestResults.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Config/DataBase/MDB_TestResults.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -279,7 +280,14 @@
       <option name="project" value="LOCAL" />
       <updated>1582807941401</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Project Commit">
+      <created>1582856671888</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1582856671889</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -335,10 +343,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="163" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1581510468126" />
-    <state x="204" y="4" key="CommitChangelistDialog2" timestamp="1582807939461">
+    <state x="204" y="4" key="CommitChangelistDialog2" timestamp="1582856669782">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="204" y="4" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1582807939461" />
+    <state x="204" y="4" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1582856669782" />
     <state x="553" y="132" key="DetectedRootsChooserDialog" timestamp="1580892779533">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -383,10 +391,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="279" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1582464829824" />
-    <state x="361" y="149" key="Vcs.Push.Dialog.v2" timestamp="1582807944103">
+    <state x="361" y="149" key="Vcs.Push.Dialog.v2" timestamp="1582856675710">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="149" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1582807944103" />
+    <state x="361" y="149" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1582856675710" />
     <state x="477" y="241" key="com.intellij.ide.util.TipDialog" timestamp="1581578457342">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
