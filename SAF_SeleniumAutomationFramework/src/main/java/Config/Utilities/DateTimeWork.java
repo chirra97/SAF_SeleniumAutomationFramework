@@ -185,5 +185,49 @@ public class DateTimeWork {
         else
             return false;
     }
+    
+    public static int getWorkingDaysBetweenTwoDates(String format, String startDate, String endDate) {
+		
+		SimpleDateFormat formatter = new SimpleDateFormat(format);
+		Date startDateTime = null;
+		Date endDateTime = null;
+		try {
+			startDateTime = formatter.parse(startDate);
+			endDateTime = formatter.parse(endDate);
+		} catch (ParseException e) {
+		}
+			
+		Calendar startCal = Calendar.getInstance();
+		startCal.setTime(startDateTime);
+
+		Calendar endCal = Calendar.getInstance();
+		endCal.setTime(endDateTime);
+
+		int workDays = 0;
+
+		// Return 0 if start and end are the same
+		if (startCal.getTimeInMillis() == endCal.getTimeInMillis()) {
+			return 0;
+		}
+
+		if (startCal.getTimeInMillis() > endCal.getTimeInMillis()) {
+			startCal.setTime(endDateTime);
+			endCal.setTime(startDateTime);
+		}
+
+		do {
+			// excluding start date
+			startCal.add(Calendar.DAY_OF_MONTH, 1);
+			if (startCal.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY
+					&& startCal.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
+				++workDays;
+			}
+		} while (startCal.getTimeInMillis() < endCal.getTimeInMillis()); // excluding end date
+
+		System.out.println("workDays : "+workDays);
+		
+		return workDays;
+	}
+
 
 }
