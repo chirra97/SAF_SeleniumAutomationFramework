@@ -212,7 +212,28 @@ public class ExcelWork {
             LinkedHashMap<String, String> rowData_lhm = new LinkedHashMap<String, String>();
             for (int j = 0; j < numberOfColumns; j++) {
                 String columnName = fis_worksheet.getRow(0).getCell(j).toString();
-                String columnValue = fis_worksheet.getRow(i).getCell(j).toString();
+               String columnValue = "";
+
+				// ########################
+				try {
+					fis_cell = fis_worksheet.getRow(i).getCell(j);
+
+					FormulaEvaluator evaluator = fis_workbook.getCreationHelper().createFormulaEvaluator();
+					CellValue cellValue = evaluator.evaluate(fis_cell);
+					
+					switch (cellValue.getCellType()) {
+					    case STRING:
+					    	columnValue = ""+cellValue.getStringValue();
+					        break;
+					    case NUMERIC:
+					    	columnValue = ""+cellValue.getNumberValue();
+					        break;
+					}
+
+				} catch (Exception e) {
+				}
+				columnValue = columnValue.replace(".0", "");
+				// ########################
                 rowData_lhm.put(columnName, columnValue);
             }
             if (i == 0) continue;
